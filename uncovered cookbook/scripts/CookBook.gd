@@ -20,12 +20,14 @@ func _on_Button_pressed():
 	var tween = get_tree().create_tween()
 	if isopened != true:
 		$Button.flip_h = true
-		tween.tween_property(self,"position",Vector2(587,0),1.2).set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(self,"position",Vector2(587,0),.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		pg_container.rect_position.x = 0
+		$"Book/Book Open".play()
 		isopened = !isopened
 	else:
 		$Button.flip_h = false
-		tween.tween_property(self,"position",Vector2(0,0),1.2).set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(self,"position",Vector2(0,0),.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		$"Book/Book Close".play()
 		isopened = !isopened
 
 
