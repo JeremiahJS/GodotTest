@@ -6,7 +6,7 @@ extends Node2D
 var isopened = false
 onready var pg_container = $Book/ClipController/HBoxContainer 
 var num_pgs = 1
-var current_pg = 1
+var current_pg = 2
 var pg_width = 216
 var cooldown = false
 
@@ -32,9 +32,9 @@ func _on_Button_pressed():
 
 
 func _on_Previous_pressed():
-	if current_pg > 1 and cooldown == false:
+	if current_pg > 2 and cooldown == false:
 		cooldown = true
-		current_pg -= 1
+		current_pg -= 2
 		animateGridPositiion(pg_container.rect_position.x + pg_width)
 		$"Book/Page Flip Sound".play()
 		yield(get_tree().create_timer(.5), "timeout")
@@ -43,13 +43,14 @@ func _on_Previous_pressed():
 
 
 func _on_Next_pressed():
-	if current_pg < num_pgs and cooldown == false:
+	if current_pg <= num_pgs and cooldown == false:
 		cooldown = true
-		current_pg += 1
+		current_pg += 2
 		animateGridPositiion(pg_container.rect_position.x - pg_width)
 		$"Book/Page Flip Sound".play()
 		yield(get_tree().create_timer(.5), "timeout")
 		cooldown = false
+		print(current_pg)
 
 func animateGridPositiion(finalValue):
 	var tween = get_tree().create_tween()
